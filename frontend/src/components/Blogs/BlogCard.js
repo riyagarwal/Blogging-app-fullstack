@@ -1,8 +1,43 @@
 import Card from "react-bootstrap/Card";
 import formatDateAndTime from "../../utils/DateTimeUtils";
+import axios from "axios";
 
-const BlogCard = ({ props }) => {
-    
+const BlogCard = ({ props }, setMyBlogs) => {
+  const token = localStorage.getItem("token");
+
+  const handleDeleteBlog = (blogId) => {
+    axios
+      .delete(
+        `${process.env.REACT_APP_BACKEND_URL}/blog/deleteBlog/${blogId}`,
+        {
+          headers: {
+            "X-Acciojob": token,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.data.status === 200) {
+          // delete successful
+          alert(res.data.message);
+
+          // fetching user blogs again after deletion and updating the user blogs state
+          // to show updated data to user
+          axios
+            .get(`${process.env.REACT_APP_BACKEND_URL}/blog/getUserBlogs`, {
+              headers: { "X-Acciojob": token },
+            })
+            .then((res) => {
+              setMyBlogs(res.data.data);
+              // console.log(myBlogs);
+            })
+            .catch((err) => alert(err));
+        } else {
+          // delete unsuccessful
+          alert(res.data.message);
+        }
+      })
+      .catch((err) => alert(err));
+  };
 
   return (
     <Card style={{ width: "100%", marginBottom: "20px" }}>
@@ -18,7 +53,9 @@ const BlogCard = ({ props }) => {
         <Button variant="primary" style={{ marginRight: "20px" }}>
           Edit
         </Button>
-        <Button variant="danger" onClick = {() => handleDeleteBlog(props._id)}>Delete</Button>
+        <Button variant="danger" onClick={() => handleDeleteBlog(props._id)}>
+          Delete
+        </Button>
       </Card.Body>
     </Card>
   );
