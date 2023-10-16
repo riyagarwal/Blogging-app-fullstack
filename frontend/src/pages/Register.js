@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Register = () => {
@@ -14,6 +14,12 @@ const Register = () => {
     display: "flex",
     justifyContent: "center",
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      window.location.href = "/home";
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     // page should not reload upon clicking submit button
