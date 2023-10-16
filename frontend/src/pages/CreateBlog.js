@@ -18,7 +18,9 @@ const CreateBlog = () => {
     };
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/blog/createBlog`, blogObj, {
-        "X-Acciojob": token,
+        headers: {
+          "X-Acciojob": token,
+        },
       })
       .then((res) => {
         if (res.data.status === 201) {
