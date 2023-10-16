@@ -45,7 +45,7 @@ const Login = () => {
   return (
     <div style={{ padding: "5rem" }}>
       <Form onSubmit={handleSubmit}>
-        <h1 style={h1Style}>Register into Blog App</h1>
+        <h1 style={h1Style}>Login to Blog App</h1>
 
         {/* Login ID */}
         <Form.Group className="mb-3" controlId="loginId">
@@ -68,7 +68,7 @@ const Login = () => {
         </Form.Group>
 
         {/* Button */}
-        <Button type="submit" style={{ marginTop: "20px" }}></Button>
+        <Button type="submit" style={{ marginTop: "20px" }}>Login</Button>
       </Form>
     </div>
   );

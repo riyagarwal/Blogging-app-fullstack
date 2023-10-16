@@ -91,7 +91,9 @@ const Register = () => {
         </Form.Group>
 
         {/* Button */}
-        <Button type="submit" style={{ marginTop: "20px" }}></Button>
+        <Button type="submit" style={{ marginTop: "20px" }}>
+          Register
+        </Button>
       </Form>
     </div>
   );
