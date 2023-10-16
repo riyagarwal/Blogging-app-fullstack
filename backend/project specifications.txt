@@ -1,0 +1,93 @@
+Blogging Website(MERN):-----
+
+1. Authentication using (JWT):-
+- Register
+- Login
+- Logout
+
+2. Create Tweet:-
+- Only text data
+- Limiting chars to 1000 char max (error if exceeds)
+- CRUD operations for tweets
+
+3. Home Page:-
+- Display tweets in reverse chronology (newest to oldest)
+- Paginate the api (limit 20 per page) or see more on scroll
+
+4. My Tweets:-
+- All the tweets of user to be displayed in reverse chronology (limit 10)
+
+5. Other features:-
+- Follow/unfollow other users
+- followers list
+- Trash
+
+
+DOCUMENT SHARED BY INSTRUCTOR ANURAG GUPTA:------------
+
+
+Blogging Assignment:-
+
+
+.Don’t 
+-Do not send a response in HTML/XML.
+-Do not send a response in string.
+-Do not call DB in the controller.
+
+
+.Do’s
+-APIs should send JSON responses (status, message, data).
+-APIs should be rate-limited - 500ms: 2hit/sec.
+
+MVC - Model(Classes, Schema), Views, Controller(routes)
+
+Authentication (Session based auth)
+Register - email(unique), (username)(unique), password, name.
+Login - Email/username, password (Protected).
+Logout
+Session-based Auth
+Create Blog
+Only text data.
+Limit (1000 char max), error(limit exceed)
+Schema(title, text, creation_datetime, userId)
+Home Page
+All the blogs in descending order of time.
+Pagination of the API (limit-10)
+Get only not deleted blogs
+Get only blogs of following 
+My Blog
+All the blogs are in descending order of time.
+Pagination of the API (limit-10)
+Edit Blogs
+Edit can only happen until 30 mins.
+Delete Blogs
+Allow the user to delete the blog anytime. 
+
+Database collections:
+User
+Session
+Blogs
+Access
+Follow
+
+Follow-up tasks:
+Follow(Create): Allow the user to follow someone.
+Schema (follower_userId, following_userId, creation DateTime)
+Followers List(Read) - Pagination, Desc order of time
+Following List(Read): Pagination, Desc order of time
+Unfollow - Delete the entry
+Bin-
+Delete should not delete the item, it should move it to the bin
+isDeleted: true, deletion_datetime: time of deletion
+Update the read api’s to check for isDeleted: true
+Cron to delete the deleted tweets from db - Everyday to delete 30 days old tweets
+
+
+Advanced Features:
+Hashtags
+Array of 30 chars string stored in blogs schema - 20 hashtags at max
+Trending (Top 10)
+blogs on a particular hashtag being used most in last 3 hrs
+Laugh/Like on blogs - Tweet schema will have a laughReaction, likeReaction keys / {type: laugh/like, blogsId , userId}
+Comments - Nested Comments 
+

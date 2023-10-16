@@ -1,0 +1,41 @@
+Database calls should be added in a separate folder.
+In this project, we add them in the 'helpers' folder.
+
+We will add all the routes in the 'routes' folder and not in the index.js file.
+
+Controllers will be stored in the 'controllers' folder.
+
+joi - used for data validation in javascript.
+For eg. here we will use it to check the format of data received when the user registers on our app.
+Joi returns an object.
+
+. Session based Authentication:-----------------
+
+When a user logs in, a session is created and saved in mongoDB.
+For every login we will see if a session is already present in mongoDB or not.
+
+mongodb session and express session are connected.
+
+
+
+
+
+
+JWT:- (in this project we will not user jwt)
+JSON Web Token
+used for generating tokens for authentication purpose.
+It has 2 parts:-
+the 1st part of token is the data that we want to send
+It can be id, username, email.
+password is usually not sent in jwt. It is not needed.
+
+The 2nd part is a sign which is unique for every user.
+
+a JWT token has 3 parts separated with 2 dots.
+the 1st part is type of jwt token, 2nd part is the payload and 3rd part is the signature.
+refer to the IBM notes on JWT.
+
+When the token is sent from the server to the client, it is stored in the local storage and
+after that whenever an API call is made, this token is passed from the client to the server via headers for authentication.
+
+
