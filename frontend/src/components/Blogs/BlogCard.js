@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 import formatDateAndTime from "../../utils/DateTimeUtils";
 import axios from "axios";
 
-const BlogCard = ({ props }, setMyBlogs) => {
+const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
   const token = localStorage.getItem("token");
 
   const handleDeleteBlog = (blogId) => {
@@ -20,17 +20,10 @@ const BlogCard = ({ props }, setMyBlogs) => {
           // delete successful
           alert(res.data.message);
 
-          // fetching user blogs again after deletion and updating the user blogs state
-          // to show updated data to user
-          axios
-            .get(`${process.env.REACT_APP_BACKEND_URL}/blog/getUserBlogs`, {
-              headers: { "X-Acciojob": token },
-            })
-            .then((res) => {
-              setMyBlogs(res.data.data);
-              // console.log(myBlogs);
-            })
-            .catch((err) => alert(err));
+          // updating the user blogs to fetch updated blogs after deletion
+          const myBlogsNew = myBlogs.filter((blog) => blog._id !== blogId);
+          setMyBlogs(myBlogsNew);
+          
         } else {
           // delete unsuccessful
           alert(res.data.message);

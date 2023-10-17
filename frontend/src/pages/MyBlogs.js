@@ -24,7 +24,7 @@ const MyBlogs = () => {
     <div style={{ padding: "3rem" }}>
       <h1 style={{ textAlign: "center", marginBottom: "50px" }}>My Blogs</h1>
       {myBlogs?.map((blog) => (
-        <BlogCard props={blog} setMyBlogs={setMyBlogs} />
+        <BlogCard props={blog} setMyBlogs={setMyBlogs} myBlogs = {myBlogs} />
       ))}
     </div>
   );
