@@ -53,7 +53,7 @@ const followUser = async (req, res) => {
   } else if (isUser1 === FALSE) {
     return res.status(400).send({
       status: 400,
-      message: "Follower User doesn't exist",
+      message: "Follower User dosen't exist",
     });
   }
 
