@@ -3,7 +3,7 @@ const {
   registerUser,
   loginUser,
   logoutUser,
-} = require("../controllers/user.controllers");
+} = require("../controllers/user.controller");
 const { isAuth } = require("../middlewares/AuthMiddleware");
 
 const userRouter = express(); //'router' is the same as 'app' in index.js just with a different name.
