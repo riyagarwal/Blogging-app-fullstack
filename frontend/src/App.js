@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
-import "./pages/Register";
+import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Homepage from "./pages/Homepage";
 import CreateBlog from "./pages/CreateBlog";

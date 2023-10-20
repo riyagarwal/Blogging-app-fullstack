@@ -5,9 +5,9 @@ const { createBlog, getUserBlogs, deleteBlog, editBlog } = require("../controlle
 
 const blogRouter = express(); //'router' is the same as 'app' in index.js just with a different name.
 
-blogRouter.post("/createBlog", isAuth, createBlog);
-blogRouter.get("/getUserBlogs", isAuth, getUserBlogs);
-blogRouter.delete("/deleteBlog/:blogId", isAuth, deleteBlog);
-blogRouter.put("/editBlog", isAuth, editBlog)
+blogRouter.post("/create-blog", isAuth, createBlog);
+blogRouter.get("/get-user-blogs", isAuth, getUserBlogs);
+blogRouter.delete("/delete-blog/:blogId", isAuth, deleteBlog);
+blogRouter.put("/edit-blog", isAuth, editBlog)
 
 module.exports = blogRouter;

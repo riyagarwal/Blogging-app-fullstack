@@ -9,9 +9,9 @@ const {
 
 const app = express();
 
-app.post("/followUser", isAuth, followUser);
-app.post("/unfollowUser", isAuth, unfollowUser);
-app.post("/getFollowingList", isAuth, getFollowingList);
-app.post("/getFollowerList", isAuth, getFollowerList);
+app.post("/follow-user", isAuth, followUser);
+app.post("/unfollow-user", isAuth, unfollowUser);
+app.post("/get-following-list", isAuth, getFollowingList);
+app.post("/get-follower-list", isAuth, getFollowerList);
 
 module.exports = app;

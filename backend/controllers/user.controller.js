@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const Joi = require("joi");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const {
   verifyUsernameAndEmailExists,
 } = require("../utils/verifyEmailUsername");
@@ -78,10 +78,9 @@ const loginUser = async (req, res) => {
   // check if loginId entered by user is email or username
   const isEmail = Joi.object({
     loginId: Joi.string().email().required(),
-  }).validate({loginId});
+  }).validate({ loginId });
   // validate always takes in data in the form of object
 
-  
   try {
     //search the database accordingly
     if (isEmail.error) {
@@ -120,7 +119,7 @@ const loginUser = async (req, res) => {
         message: "Login Successful!",
       });
     } else {
-       res.status(400).send({
+      res.status(400).send({
         message: "Incorrect Password!",
       });
     }
@@ -130,25 +129,56 @@ const loginUser = async (req, res) => {
       username: userData.data.username,
       name: userData.data.name,
       email: userData.data.email,
-      userId: userData.data._id
-    }
+      userId: userData.data._id,
+    };
 
-    const token = await jwt.sign(payload, process.env.JWT_SECRET)
+    const token = await jwt.sign(payload, process.env.JWT_SECRET);
 
     res.status(200).send({
       status: 200,
       message: "Login successful!",
       data: {
-        token
-      }
-    })
-
+        token,
+      },
+    });
   } catch (err) {
     res.status(400).send({
       message: "Login failed!",
       data: err,
     });
   }
+};
+
+// GET ALL USERS
+const getAllUsers = async (req, res) => {
+  const userId = req.locals.userId;
+
+  const allUsersData = await getAllUsersFromDB(userId);
+
+  if (allUsersData.err) {
+    return res.status(400).send({
+      status: 400,
+      message: "DB Error: getAllUsersFromDB failed",
+    });
+  }
+
+  let usersData = [];
+  allUsersData.data.map((user) => {
+    let userObj = {
+      name: user.name,
+      username: user.username,
+      email: user.email,
+      _id: user._id,
+    };
+
+    usersData.push(userObj);
+  });
+
+  res.status(200).send({
+    status: 200,
+    message: "All users fetched successfully",
+    data: usersData,
+  });
 };
 
 module.exports = { registerUser, loginUser };
