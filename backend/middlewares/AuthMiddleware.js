@@ -2,9 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const isAuth = (req, res, next) => {
   const token = req.headers["x-acciojob"];
+  let verifiedPayload;
 
   try {
-    const verifiedPayload = jwt.verify(token, process.env.JWT_SECRET);
+    verifiedPayload = jwt.verify(token, process.env.JWT_SECRET);
   } catch (err) {
     return res.status(400).send({
       status: 400,
@@ -26,6 +27,7 @@ const isAuth = (req, res, next) => {
       message: "User is unauthenticated. Please login",
     });
   }
+
 };
 
 module.exports = { isAuth };

@@ -1,5 +1,5 @@
 const { ERR, TRUE, FALSE } = require("../constants");
-const { getFollowData } = require("../repository/follow.repository");
+const { getFollowData } = require("../repositories/follow.repository");
 
 const checkIfUserFollows = async (followingUserId, followerUserId) => {
   const followData = await getFollowData(followingUserId, followerUserId);

@@ -1,5 +1,5 @@
 const { ERR, TRUE, FALSE } = require("../constants");
-const { getUserDataFromId } = require("../repository/user.repository");
+const { getUserDataFromId } = require("../repositories/user.repository");
 
 const verifyUserId = async (userId) => {
   const userData = await getUserDataFromId(userId);

@@ -7,7 +7,8 @@ const {
   getFollowingDetailsFromDB,
   getFollowerListFromDB,
   getFollowerDetailsFromDB,
-} = require("../repository/follow.repository");
+} = require("../repositories/follow.repository");
+
 const { checkIfUserFollows } = require("../utils/checkIfUserFollows");
 const { verifyUserId } = require("../utils/verifyUserId");
 const Joi = require("joi");

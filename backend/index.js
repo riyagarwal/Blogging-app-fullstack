@@ -21,6 +21,6 @@ app.use("/user", userRoutes);
 app.use("/blog", blogRoutes);
 app.use("/follow", followRoutes);
 
-app.listen(PORT, () => {
+app.listen(8001, () => {
   console.log("Server is running at port", PORT);
 });

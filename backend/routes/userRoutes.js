@@ -11,4 +11,5 @@ const app = express(); //'router' is the same as 'app' in index.js just with a d
 app.post("/register", registerUser);
 app.post("/login", loginUser);
 app.post("/get-all-users", getAllUsers)
+
 module.exports = app;

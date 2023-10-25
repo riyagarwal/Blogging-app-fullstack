@@ -2,21 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const FollowSchema = new Schema({
+  // if A follows B, then
   followerUserId: {
-    // this is a foreign key to the users collection
-    type: Schema.Types.ObjectId,
+    // this is A's id
+    type: String,
     ref: "users",
     require: true,
   },
   followingUserId: {
-    // this also is a foreign key to the users collection
-    type: Schema.Types.ObjectId,
+    // this is B's id
+    type: String,
     ref: "users",
     require: true,
   },
   creationDateTime: {
     type: Date,
-    default: Date.now(),
     require: true,
   },
 });

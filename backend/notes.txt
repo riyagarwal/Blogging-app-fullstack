@@ -1,5 +1,4 @@
 Database calls should be added in a separate folder.
-In this project, we add them in the 'helpers' folder.
 
 We will add all the routes in the 'routes' folder and not in the index.js file.
 
