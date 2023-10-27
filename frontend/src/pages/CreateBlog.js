@@ -5,7 +5,7 @@ import { useState } from "react";
 
 const CreateBlog = () => {
   const [title, setTitle] = useState();
-  const [blogBody, setBlogBody] = useState();
+  const [textBody, setTextBody] = useState();
 
   const token = localStorage.getItem("token");
 
@@ -14,7 +14,7 @@ const CreateBlog = () => {
 
     const blogObj = {
       title,
-      blogBody,
+      textBody,
     };
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/blog/createBlog`, blogObj, {
@@ -62,7 +62,7 @@ const CreateBlog = () => {
             as="textarea"
             rows={5}
             placeholder="Type your Blog here!"
-            onChange={(e) => setBlogBody(e.target.value)}
+            onChange={(e) => setTextBody(e.target.value)}
           />
         </Form.Group>
 

@@ -142,7 +142,7 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (err) {
-    res.status(400).send({
+    return res.status(400).send({
       message: "Login failed!",
       data: err,
     });
