@@ -53,10 +53,11 @@ const registerUser = async (req, res) => {
 
   const userObj = new User({
     name: req.body.name,
-    username: req.body.user,
     email: req.body.email,
+    username: req.body.username,
     password: hashedPassword,
   });
+
 
   try {
     await userObj.save();
@@ -73,81 +74,69 @@ const registerUser = async (req, res) => {
 // LOGIN USER
 const loginUser = async (req, res) => {
   const { loginId, password } = req.body;
-  let userData;
 
-  // check if loginId entered by user is email or username
   const isEmail = Joi.object({
     loginId: Joi.string().email().required(),
   }).validate({ loginId });
-  // validate always takes in data in the form of object
 
-  try {
-    //search the database accordingly
-    if (isEmail.error) {
-      try {
-        userData = await User.findOne({ username: loginId });
-        console.log(`userData: ${userData}`)
-      } catch (err) {
-        // case when connection to db is lost
-        res.status(400).send({
-          message: "Unable to get data from username from DB",
-        });
-      }
-    } else {
-      try {
-        userData = await User.findOne({ email: loginId });
-      } catch (err) {
-        // case when connection to db is lost
-        res.status(400).send({
-          message: "Unable to get data from email from DB",
-        });
-      }
-    }
+  let userData;
 
-    // If we do not get userData from the database, it means no user is present with that loginid.
-    if (!userData) {
+  if (isEmail.error) {
+    userData = await getUserDataFromUsername(loginId);
+    if (userData.err) {
       return res.status(400).send({
-        message: "No user found! Please register or check your credentials",
+        status: 400,
+        message: "DB error: getUserDataFromUsername failed",
+        data: userData.err,
       });
     }
+  } else {
+    userData = await getUserDataFromEmail(loginId);
 
-    // if userData is found for the corresponding loginId
-    // match the password with the encrypted db password
-    const isPasswordSame = await bcrypt.compare(password, userData.password);
-
-    if (isPasswordSame) {
-      return res.status(200).send({
-        message: "Login Successful!",
-      });
-    } else {
-      res.status(400).send({
-        message: "Incorrect Password!",
+    if (userData.err) {
+      return res.status(400).send({
+        status: 400,
+        message: "DB error: getUserDataFromEmail failed",
+        data: userData.err,
       });
     }
+  }
 
-    // if password matches successfully => user should be able to login
-    const payload = {
-      username: userData.data.username,
-      name: userData.data.name,
-      email: userData.data.email,
-      userId: userData.data._id,
-    };
-
-    const token = await jwt.sign(payload, process.env.JWT_SECRET);
-
-    res.status(200).send({
-      status: 200,
-      message: "Login successful!",
-      data: {
-        token,
-      },
-    });
-  } catch (err) {
+  if (!userData.data) {
     return res.status(400).send({
-      message: "Login failed!",
-      data: err,
+      status: 400,
+      message: "No user found! Please register",
     });
   }
+
+  const isPasswordMatching = await bcrypt.compare(
+    password,
+    userData.data.password
+  );
+
+  if (!isPasswordMatching) {
+    return res.status(400).send({
+      status: 400,
+      message: "Incorrect Password",
+    });
+  }
+
+  const payload = {
+    username: userData.data.username,
+    name: userData.data.name,
+    email: userData.data.email,
+    userId: userData.data._id,
+  };
+
+  const token = await jwt.sign(payload, process.env.JWT_SECRET);
+
+  res.status(200).send({
+    status: 200,
+    message: "Logged in successfully",
+    data: {
+      token,
+    },
+  });
 };
 
 // GET ALL USERS

@@ -1,5 +1,38 @@
 const User = require("../models/User");
 
+const getUserDataFromUsername = async (username) => {
+  const userData = {
+    data: null,
+    err: null,
+  };
+
+  try {
+    userData.data = await User.findOne({ username });
+
+    return userData;
+  } catch (err) {
+    userData.err = err;
+    return userData;
+  }
+};
+
+const getUserDataFromEmail = async (email) => {
+  const userData = {
+    data: null,
+    err: null,
+  };
+
+  try {
+    userData.data = await User.findOne({ email });
+    console.log(userData.data);
+
+    return userData;
+  } catch (err) {
+    userData.err = err;
+    return userData;
+  }
+};
+
 const getAllUsersFromDB = async (userId) => {
   const allUserData = {
     data: null,
@@ -31,4 +64,8 @@ const getUserDataFromId = async (userId) => {
   }
 };
 
-module.exports = (getAllUsersFromDB, getUserDataFromId);
+module.exports =
+  (getUserDataFromUsername,
+  getUserDataFromEmail,
+  getAllUsersFromDB,
+  getUserDataFromId);

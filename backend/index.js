@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const app = express();
 
 // file imports
 require("dotenv").config();
@@ -9,7 +10,6 @@ const userRoutes = require("./routes/userRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const followRoutes = require("./routes/followRoutes")
 const {cleanUpBin} = require("./utils/cron")
-const app = express();
 
 const PORT = process.env.SERVER_PORT;
 
@@ -18,6 +18,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" })); //accept api calls from any source
 
 // adding all the routes from routes folder
+
 app.use("/user", userRoutes);
 app.use("/blog", blogRoutes);
 app.use("/follow", followRoutes);

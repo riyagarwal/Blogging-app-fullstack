@@ -1,9 +1,10 @@
 const User = require("../models/User");
 
 const verifyUsernameAndEmailExists = async (email, username) => {
+  // console.log(email, username)
   try {
     const userData = await User.findOne({
-      $or: [{ email }, { username }],
+      $or: [{ "email":email }, { username }],
     }); //find based on email or username
 
     console.log(userData)
@@ -17,6 +18,7 @@ const verifyUsernameAndEmailExists = async (email, username) => {
     }
 
     return null;
+
   } catch (err) {
     return "err"
   }

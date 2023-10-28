@@ -34,6 +34,10 @@ const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
       });
   };
 
+  const h1Style = {
+   
+  }
+
   const handleDeleteBlog = (blogId) => {
     axios
       .delete(
