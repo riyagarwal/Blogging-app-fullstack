@@ -11,7 +11,7 @@ const app = express();
 
 app.post("/follow-user", isAuth, followUser);
 app.post("/unfollow-user", isAuth, unfollowUser);
-app.post("/get-following-list", isAuth, getFollowingList);
-app.post("/get-follower-list", isAuth, getFollowerList);
+app.get("/get-following-list", isAuth, getFollowingList);
+app.get("/get-follower-list", isAuth, getFollowerList);
 
 module.exports = app;

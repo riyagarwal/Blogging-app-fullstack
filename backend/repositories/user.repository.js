@@ -1,3 +1,5 @@
+const User = require("../models/User");
+
 const getAllUsersFromDB = async (userId) => {
   const allUserData = {
     data: null,
@@ -13,3 +15,20 @@ const getAllUsersFromDB = async (userId) => {
     return allUserData;
   }
 };
+
+const getUserDataFromId = async (userId) => {
+  const userData = {
+    data: null,
+    err: null,
+  };
+
+  try {
+    userData.data = await User.findById(userId);
+    return userData;
+  } catch (err) {
+    userData.err = err;
+    return userData;
+  }
+};
+
+module.exports = (getAllUsersFromDB, getUserDataFromId);

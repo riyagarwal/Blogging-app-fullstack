@@ -2,6 +2,7 @@ const { TRUE, ERR, FALSE } = require("../constants");
 const Follow = require("../models/Follow");
 const User = require("../models/User");
 
+// used to check if follower already follows following
 const getFollowData = async (followingUserId, followerUserId) => {
   const followData = {
     data: null,
@@ -15,12 +16,14 @@ const getFollowData = async (followingUserId, followerUserId) => {
     followData.err = err;
     return followData;
   }
+
+  // if we get followData then that means follower already follows
 };
 
+// make a user follow another user
 const addFollowToDB = async (followObj) => {
   try {
     await followObj.save();
-
     return TRUE;
   } catch (err) {
     return ERR;
@@ -30,8 +33,8 @@ const addFollowToDB = async (followObj) => {
 const deleteFollowFromDB = async (followerUserId, followingUserId) => {
   try {
     await Follow.findOneAndDelete({ followerUserId, followingUserId });
-
     return TRUE;
+
   } catch (err) {
     return ERR;
   }
@@ -45,11 +48,28 @@ const getFollowingListFromDB = async (followerUserId) => {
 
   try {
     followingList.data = await Follow.find({ followerUserId });
-
     return followingList;
+
   } catch (err) {
     followingList.err = err;
     return followingList;
+  }
+};
+
+const getFollowingDetailsFromDB = async (followingUserIds) => {
+  let followingDetails = {
+    data: null,
+    err: null,
+  };
+
+  try {
+    // fetch details from the db based on the followingUserIds array
+    followingDetails.data = await User.find({ _id: { $in: followingUserIds } });
+
+    return followingDetails;
+  } catch (err) {
+    followingDetails.err = err;
+    return followingDetails;
   }
 };
 
@@ -66,22 +86,6 @@ const getFollowerListFromDB = async (followingUserId) => {
   } catch (err) {
     followerList.err = err;
     return followerList;
-  }
-};
-
-const getFollowingDetailsFromDB = async (followingUserId) => {
-  let followingDetails = {
-    data: null,
-    err: null,
-  };
-
-  try {
-    followingDetails.data = await User.find({ _id: { $in: followingUserId } });
-
-    return followingDetails;
-  } catch (err) {
-    followingDetails.err = err;
-    return followingDetails;
   }
 };
 

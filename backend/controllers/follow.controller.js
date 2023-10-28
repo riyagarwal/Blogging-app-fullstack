@@ -13,6 +13,7 @@ const { checkIfUserFollows } = require("../utils/checkIfUserFollows");
 const { verifyUserId } = require("../utils/verifyUserId");
 const Joi = require("joi");
 
+// POST - Follow a user
 const followUser = async (req, res) => {
   const followerUserId = req.locals.userId;
   const { followingUserId } = req.body;
@@ -30,7 +31,7 @@ const followUser = async (req, res) => {
     });
   }
 
-  // validate followingUserId
+  // validate followingUserId - but this is optional
   const isUser = await verifyUserId(followingUserId);
   if (isUser === ERR) {
     return res.status(400).send({
@@ -40,11 +41,11 @@ const followUser = async (req, res) => {
   } else if (isUser === FALSE) {
     return res.status(400).send({
       status: 400,
-      message: "Following User dosen't exist",
+      message: "Following User doesn't exist",
     });
   }
 
-  // validate followerUserId
+  // validate followerUserId - but this is optional
   const isUser1 = await verifyUserId(followerUserId);
   if (isUser1 === ERR) {
     return res.status(400).send({
@@ -93,10 +94,11 @@ const followUser = async (req, res) => {
 
   res.status(201).send({
     status: 201,
-    message: "Followed successfully",
+    message: "Followed successfully!",
   });
 };
 
+// POST - Unfollow user
 const unfollowUser = async (req, res) => {
   const followerUserId = req.locals.userId;
   const { followingUserId } = req.body;
@@ -175,10 +177,11 @@ const unfollowUser = async (req, res) => {
   });
 };
 
+// GET - List of people whom I follow
 const getFollowingList = async (req, res) => {
   const userId = req.locals.userId;
 
-  // validate followingUserId
+  // validate followingUserId - optional
   const isUser = await verifyUserId(userId);
   if (isUser === ERR) {
     return res.status(400).send({
@@ -201,12 +204,12 @@ const getFollowingList = async (req, res) => {
     });
   }
 
-  let followingUserId = [];
+  let followingUserIds = [];
   followingList.data.forEach((followObj) => {
-    followingUserId.push(followObj.followingUserId);
+    followingUserIds.push(followObj.followingUserId);
   });
 
-  const followingDetails = await getFollowingDetailsFromDB(followingUserId);
+  const followingDetails = await getFollowingDetailsFromDB(followingUserIds);
 
   if (followingDetails.err) {
     return res.status(400).send({
@@ -234,6 +237,7 @@ const getFollowingList = async (req, res) => {
   });
 };
 
+// GET - list of people who follow me
 const getFollowerList = async (req, res) => {
   const userId = req.locals.userId;
 
@@ -247,7 +251,7 @@ const getFollowerList = async (req, res) => {
   } else if (isUser === FALSE) {
     return res.status(400).send({
       status: 400,
-      message: "Follower User dosen't exist",
+      message: "Follower User doesn't exist",
     });
   }
 

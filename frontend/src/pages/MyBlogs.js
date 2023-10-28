@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BlogCard from "../components/Blogs/BlogCard";
+import Header from "../components/common/Header";
 
 const MyBlogs = () => {
   const [myBlogs, setMyBlogs] = useState();
@@ -21,12 +22,15 @@ const MyBlogs = () => {
   }, [token]);
 
   return (
+    <>
+    <Header />
     <div style={{ padding: "3rem" }}>
       <h1 style={{ textAlign: "center", marginBottom: "50px" }}>My Blogs</h1>
-      {myBlogs?.map((blog) => (
-        <BlogCard props={blog} setMyBlogs={setMyBlogs} myBlogs = {myBlogs} />
+      {myBlogs?.map((blog, key) => (
+        <BlogCard key={key} props={blog} setMyBlogs={setMyBlogs} myBlogs = {myBlogs} />
       ))}
     </div>
+    </>
   );
 };
 

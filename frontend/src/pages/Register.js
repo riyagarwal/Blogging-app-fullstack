@@ -45,6 +45,7 @@ const Register = () => {
         alert(err);
       });
   };
+  
   return (
     <div style={{ padding: "5rem" }}>
       <Form onSubmit={handleSubmit}>

@@ -86,6 +86,7 @@ const loginUser = async (req, res) => {
     if (isEmail.error) {
       try {
         userData = await User.findOne({ username: loginId });
+        console.log(`userData: ${userData}`)
       } catch (err) {
         // case when connection to db is lost
         res.status(400).send({

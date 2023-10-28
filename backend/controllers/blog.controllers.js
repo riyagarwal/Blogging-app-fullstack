@@ -23,6 +23,7 @@ const createBlog = async (req, res) => {
   const blogObj = new Blog({
     title,
     textBody,
+    creationDateTime: Date.now(),
     username: req.locals.username,
     userId: req.locals.userId,
   });

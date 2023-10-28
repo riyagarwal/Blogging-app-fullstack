@@ -82,9 +82,10 @@ const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
           Delete
         </Button>
 
+        {/* edit blog */}
         {isEdit ? (
           <>
-            <Form onSubmit={() => handleSubmit(props._id)}>
+            <Form onSubmit={(e) => handleSubmit(e, props._id)}>
               <h1 style={h1Style}>Edit Blog</h1>
 
               {/* Blog title */}
