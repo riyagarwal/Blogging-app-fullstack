@@ -5,6 +5,12 @@ const jwt = require("jsonwebtoken");
 const {
   verifyUsernameAndEmailExists,
 } = require("../utils/verifyEmailUsername");
+const { TRUE, FALSE, ERR } = require("../constants");
+const {
+  getUserDataFromEmail,
+  getUserDataFromUsername,
+} = require("../repositories/user.repository");
+
 const BCRYPT_SALT = parseInt(process.env.BCRYPT_SALT);
 
 // REGISTER USER
@@ -25,28 +31,23 @@ const registerUser = async (req, res) => {
   }
 
   // checking if username or email already exists before registering a new user
-  const usernameEmailVerify = verifyUsernameAndEmailExists(
+  const isExistingUser = await verifyUsernameAndEmailExists(
     req.body.email,
     req.body.username
   );
 
-  console.log(usernameEmailVerify);
+  console.log(isExistingUser);
 
-  if (usernameEmailVerify === "E") {
-    res.status(400).send({
-      message: "Email already exists",
+  if (isExistingUser === TRUE) {
+    return res.status(400).send({
+      status: 400,
+      message: "Email or Username already exists.",
     });
-    return;
-  } else if (usernameEmailVerify === "U") {
-    res.status(400).send({
-      message: "Username already exists",
+  } else if (isExistingUser === ERR) {
+    return res.status(400).send({
+      status: 400,
+      message: "Err: verifyUsernameAndEmailExists failed",
     });
-    return;
-  } else if (usernameEmailVerify === "err") {
-    res.status(400).send({
-      message: "DB error: Couldn't register user!",
-    });
-    return;
   }
 
   const hashedPassword = await bcrypt.hash(req.body.password, BCRYPT_SALT);
@@ -57,7 +58,6 @@ const registerUser = async (req, res) => {
     username: req.body.username,
     password: hashedPassword,
   });
-
 
   try {
     await userObj.save();

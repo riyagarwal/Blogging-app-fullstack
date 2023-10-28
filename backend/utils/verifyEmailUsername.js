@@ -1,26 +1,19 @@
-const User = require("../models/User");
+const {TRUE, FALSE, ERR} = require("../constants")
+
+const {
+  findUsersWithEmailOrUsername
+} = require("../repositories/user.repository");
 
 const verifyUsernameAndEmailExists = async (email, username) => {
-  // console.log(email, username)
-  try {
-    const userData = await User.findOne({
-      $or: [{ "email":email }, { username }],
-    }); //find based on email or username
+  const userData = await findUsersWithEmailOrUsername(email, username);
 
-    console.log(userData)
-    
-    if (userData && (userData.email === email)) {
-      return "E";
-    }
-
-    if (userData && (userData.username === username)) {
-      return "U";
-    }
-
-    return null;
-
-  } catch (err) {
-    return "err"
+  // Different states of response
+  if (userData.err) {
+    return ERR;
+  } else if (userData.data.length !== 0) {
+    return TRUE; //user exists
+  } else {
+    return FALSE;
   }
 };
 
