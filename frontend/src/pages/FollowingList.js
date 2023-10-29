@@ -9,7 +9,7 @@ function FollowingList() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/follow/following-list`, {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`, {
         headers: {
           "X-Acciojob": token,
         },
@@ -38,7 +38,7 @@ function FollowingList() {
   return (
     <div>
       <Header />
-      <h1 style={{ textAlign: "center", margin: "20px" }}>Following List</h1>
+      <h1 style={{ textAlign: "center", margin: "20px" }}>Following</h1>
       <div style={{ padding: "20px", display: "flex" }}>
         {followingList?.map((user) => (
           <UserCard props={user} />

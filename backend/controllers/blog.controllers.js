@@ -1,10 +1,8 @@
 const Joi = require("joi");
 const Blog = require("../models/Blog");
 const { blogBelongsToUser } = require("../utils/blogBelongsToUser");
-const {
-  getFollowingBlogsFromDB,
-  getFollowingListFromDB
-} = require("../repositories/follow.repository");
+const { getFollowingListFromDB } = require("../repositories/follow.repository");
+const { getFollowingBlogsFromDB } = require("../repositories/blog.repository");
 
 // POST - create blog
 const createBlog = async (req, res) => {

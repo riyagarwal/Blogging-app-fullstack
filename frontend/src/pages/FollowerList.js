@@ -9,14 +9,14 @@ function FollowerList() {
 
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/follow/followerList`, {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/follow/get-follower-list`, {
         headers: {
           "X-Acciojob": token,
         },
       })
       .then((res1) => {
         axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/follow/followingList`, {
+          .get(`${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`, {
             headers: {
               "X-Acciojob": token,
             },
@@ -68,7 +68,7 @@ function FollowerList() {
   return (
     <div>
       <Header />
-      <h1 style={{ textAlign: "center", margin: "20px" }}>Follower List</h1>
+      <h1 style={{ textAlign: "center", margin: "20px" }}>Follower</h1>
       <div style={{ padding: "20px", display: "flex" }}>
         {followerList?.map((user) => (
           <UserCard props={user} />

@@ -13,11 +13,11 @@ function Header() {
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/homepage">Blogging App</Navbar.Brand>
+        <Navbar.Brand href="/home">Blogging App</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link href="/homepage">Home</Nav.Link>
+          <Nav className="me-auto" >
+            <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/create-blog">Create Blog</Nav.Link>
             <Nav.Link href="/my-blogs">My Blogs</Nav.Link>
             <Nav.Link href="/follower-list">Follower List</Nav.Link>

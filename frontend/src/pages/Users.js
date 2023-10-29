@@ -16,7 +16,7 @@ function Users() {
       })
       .then((res1) => {
         axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/follow/following-list`, {
+          .get(`${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`, {
             headers: {
               "X-Acciojob": token,
             },
@@ -64,8 +64,6 @@ function Users() {
         alert(err);
       });
   }, [token]);
-
-  console.log(users)
 
   return (
     <div>
