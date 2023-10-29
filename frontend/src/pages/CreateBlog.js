@@ -18,7 +18,7 @@ const CreateBlog = () => {
       textBody,
     };
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/blog/createBlog`, blogObj, {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/blog/create-blog`, blogObj, {
         headers: {
           "X-Acciojob": token,
         },

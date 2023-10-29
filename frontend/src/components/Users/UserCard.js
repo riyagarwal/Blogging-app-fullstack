@@ -1,51 +1,76 @@
-import React, { useEffect, useState } from "react";
-import Header from "../components/common/Header";
 import axios from "axios";
-import UserCard from "../components/Users/UserCard";
 
-function FollowingList() {
-  const [followingList, setFollowingList] = useState();
+import Card from "react-bootstrap/Card"
+import Button from "react-bootstrap/Button"
+
+function UserCard({ props }) {
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
+  const handleFollow = (userId) => {
+    const followObj = { followingUserId: userId };
+
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/follow/following-list`, {
-        headers: {
-          "X-Acciojob": token,
-        },
-      })
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/follow/follow-user`,
+        followObj,
+        {
+          headers: {
+            "X-Acciojob": token,
+          },
+        }
+      )
       .then((res) => {
-        let followingListArr = [];
-        res.data.data.forEach((user) => {
-          const userObj = {
-            _id: user._id,
-            username: user.username,
-            name: user.name,
-            email: user.email,
-            follow: true,
-          };
-
-          followingListArr.push(userObj);
-        });
-
-        setFollowingList(followingListArr);
+        alert("Successfully followed!");
+        window.location.reload();
       })
       .catch((err) => {
         alert(err);
       });
-  }, [token]);
+  };
 
+  const handleUnfollow = (userId) => {
+    const followObj = { followingUserId: userId };
+
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/follow/unfollow-user`,
+        followObj,
+        {
+          headers: {
+            "X-Acciojob": token,
+          },
+        }
+      )
+      .then((res) => {
+        alert("Successfully unfollowed!");
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
   return (
-    <div>
-      <Header />
-      <h1 style={{ textAlign: "center", margin: "20px" }}>Following List</h1>
-      <div style={{ padding: "20px", display: "flex" }}>
-        {followingList?.map((user) => (
-          <UserCard props={user} />
-        ))}
-      </div>
-    </div>
+    <Card style={{ width: "18rem", margin: "10px" }}>
+      <Card.Body>
+        <Card.Title>{props.name}</Card.Title>
+        <Card.Text>{props.username}</Card.Text>
+        <Card.Text>{props.email}</Card.Text>
+        {props.follow ? (
+          <>
+            <Button variant="danger" onClick={() => handleUnfollow(props._id)}>
+              Unfollow
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button variant="primary" onClick={() => handleFollow(props._id)}>
+              Follow
+            </Button>
+          </>
+        )}
+      </Card.Body>
+    </Card>
   );
 }
 
-export default FollowingList;
+export default UserCard;

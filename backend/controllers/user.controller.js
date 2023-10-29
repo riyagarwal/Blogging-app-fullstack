@@ -9,6 +9,7 @@ const { TRUE, FALSE, ERR } = require("../constants");
 const {
   getUserDataFromEmail,
   getUserDataFromUsername,
+  getAllUsersFromDB
 } = require("../repositories/user.repository");
 
 const BCRYPT_SALT = parseInt(process.env.BCRYPT_SALT);
@@ -35,8 +36,6 @@ const registerUser = async (req, res) => {
     req.body.email,
     req.body.username
   );
-
-  console.log(isExistingUser);
 
   if (isExistingUser === TRUE) {
     return res.status(400).send({
@@ -142,6 +141,7 @@ const loginUser = async (req, res) => {
 // GET ALL USERS
 const getAllUsers = async (req, res) => {
   const userId = req.locals.userId;
+  // console.log(req.locals)
 
   const allUsersData = await getAllUsersFromDB(userId);
 

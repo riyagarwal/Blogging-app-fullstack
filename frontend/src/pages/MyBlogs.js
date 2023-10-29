@@ -11,7 +11,7 @@ const MyBlogs = () => {
   // fetching my blogs on page load
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/blog/getUserBlogs`, {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/blog/get-user-blogs`, {
         headers: { "X-Acciojob": token },
       })
       .then((res) => {

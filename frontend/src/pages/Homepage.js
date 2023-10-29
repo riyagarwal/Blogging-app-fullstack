@@ -26,6 +26,8 @@ function Homepage() {
     <div>
       <Header />
       <div style={{ padding: "30px" }}>
+
+        <h1>BlogChain</h1>
         {homeBlogs?.map((blog) => (
           <BlogCard props={blog} homepage={true} />
         ))}

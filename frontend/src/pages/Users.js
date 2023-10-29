@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../components/common/Header";
 import axios from "axios";
 import UserCard from "../components/Users/UserCard";
@@ -64,6 +64,8 @@ function Users() {
         alert(err);
       });
   }, [token]);
+
+  console.log(users)
 
   return (
     <div>
