@@ -49,8 +49,19 @@ function UserCard({ props }) {
         alert(err);
       });
   };
+
+  const cardStyle = {
+    width: "20%",
+    marginBottom: "20px",
+    margin: "10px",
+    padding: "5px",
+    backgroundColor: "#242422",
+    color: "white",
+    border: "1px solid grey",
+  };
+
   return (
-    <Card style={{ width: "18rem", margin: "10px" }}>
+    <Card style={cardStyle}>
       <Card.Body>
         <Card.Title>{props.name}</Card.Title>
         <Card.Text>{props.username}</Card.Text>

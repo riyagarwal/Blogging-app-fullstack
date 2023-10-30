@@ -1,10 +1,12 @@
-const { Blog } = require("../models/Blog");
+const Blog = require("../models/Blog");
 
 const getBlogDataFromDB = async (blogId) => {
   let blogData = {
     data: null,
     err: null,
   };
+
+  console.log(`BlogId: ${blogId}`)
 
   try {
     blogData.data = await Blog.findOne({ _id: blogId });

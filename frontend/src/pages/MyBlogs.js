@@ -16,20 +16,51 @@ const MyBlogs = () => {
       })
       .then((res) => {
         setMyBlogs(res.data.data);
-        // console.log(myBlogs);
       })
       .catch((err) => alert(err));
   }, [token]);
 
+  const divStyle = {
+    padding: "30px",
+    width: "70%",
+    margin: "auto",
+  };
+
+  const h1Style = {
+    textAlign: "center",
+    marginTop: "20px",
+    letterSpacing: "1.5px",
+  };
+
+  const h4Style = {
+    textAlign: "center",
+    marginTop: "40px",
+    marginBottom: "0px",
+    letterSpacing: "0.5px",
+    fontWeight: "400",
+  };
+
   return (
     <>
-    <Header />
-    <div style={{ padding: "3rem" }}>
-      <h1 style={{ textAlign: "center", marginBottom: "50px" }}>My Blogs</h1>
-      {myBlogs?.map((blog, key) => (
-        <BlogCard key={key} props={blog} setMyBlogs={setMyBlogs} myBlogs = {myBlogs} />
-      ))}
-    </div>
+      <Header />
+      <div style={divStyle}>
+        <h1 style={h1Style}>My Blogs</h1>
+        <hr style={{marginBottom: "30px"}} />
+        {myBlogs && myBlogs.length > 0 ? (
+          myBlogs.map((blog, key) => (
+            <BlogCard
+              key={key}
+              props={blog}
+              setMyBlogs={setMyBlogs}
+              myBlogs={myBlogs}
+            />
+          ))
+        ) : (
+          <h5 style={h4Style}>
+            We can't wait to see your first blog on BlogChain!
+          </h5>
+        )}
+      </div>
     </>
   );
 };

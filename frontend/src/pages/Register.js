@@ -9,12 +9,6 @@ const Register = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
-  const h1Style = {
-    marginBottom: "40px",
-    display: "flex",
-    justifyContent: "center",
-  };
-
   useEffect(() => {
     if (localStorage.getItem("token")) {
       window.location.href = "/home";
@@ -45,9 +39,32 @@ const Register = () => {
         alert(err);
       });
   };
-  
+
+  const mainDivStyle = {
+    width: "40%",
+    margin: "0",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    border: "1px solid grey",
+    padding: "50px 50px 30px 50px",
+    borderRadius: "10px",
+  };
+
+  const h1Style = {
+    marginBottom: "40px",
+    display: "flex",
+    justifyContent: "center",
+  };
+
+  const btnStyle = {
+    width: "30%",
+    margin: "25px 0",
+  };
+
   return (
-    <div style={{ padding: "5rem" }}>
+    <div style={mainDivStyle}>
       <Form onSubmit={handleSubmit}>
         <h1 style={h1Style}>Register into Blog App</h1>
 
@@ -92,10 +109,18 @@ const Register = () => {
         </Form.Group>
 
         {/* Button */}
-        <Button type="submit" style={{ marginTop: "20px" }}>
-          Register
-        </Button>
+        <div style={{ textAlign: "center" }}>
+          <Button type="submit" style={btnStyle}>
+            Register
+          </Button>
+        </div>
       </Form>
+
+      <div style={{ textAlign: "center" }}>Already a user?{" "}
+        <a href="/login" style={{ textDecoration: "none" }}>
+          Login instead
+        </a>
+      </div>
     </div>
   );
 };

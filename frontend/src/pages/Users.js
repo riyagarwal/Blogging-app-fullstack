@@ -16,11 +16,14 @@ function Users() {
       })
       .then((res1) => {
         axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`, {
-            headers: {
-              "X-Acciojob": token,
-            },
-          })
+          .get(
+            `${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`,
+            {
+              headers: {
+                "X-Acciojob": token,
+              },
+            }
+          )
           .then((res2) => {
             let followingMap = new Map();
 
@@ -65,16 +68,31 @@ function Users() {
       });
   }, [token]);
 
+  const divStyle = {
+    padding: "30px",
+    width: "70%",
+    margin: "auto",
+  };
+
+  const h1Style = {
+    textAlign: "center",
+    margin: "10px auto 0px",
+    letterSpacing: "1.5px",
+  };
+
   return (
-    <div>
+    <>
       <Header />
-      <h1 style={{ textAlign: "center", margin: "20px" }}>Users</h1>
-      <div style={{ padding: "20px", display: "flex" }}>
-        {users?.map((user) => (
-          <UserCard props={user} />
-        ))}
+      <div style={divStyle}>
+        <h1 style={h1Style}>Users</h1>
+        <hr style={{ marginBottom: "30px" }} />
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+          {users?.map((user) => (
+            <UserCard props={user} />
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -36,14 +36,31 @@ const Login = () => {
       });
   };
 
+  const mainDivStyle = {
+    width: "40%",
+    margin: "0",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    border: "1px solid grey",
+    padding: "50px 50px 30px 50px",
+    borderRadius: "10px",
+  };
+
   const h1Style = {
-    marginBottom: "40px",
+    marginBottom: "50px",
     display: "flex",
     justifyContent: "center",
   };
 
+  const btnStyle = {
+    width: "30%",
+    margin: "25px 0",
+  };
+
   return (
-    <div style={{ padding: "5rem" }}>
+    <div style={mainDivStyle}>
       <Form onSubmit={handleSubmit}>
         <h1 style={h1Style}>Login to Blog App</h1>
 
@@ -68,8 +85,18 @@ const Login = () => {
         </Form.Group>
 
         {/* Button */}
-        <Button type="submit" style={{ marginTop: "20px" }}>Login</Button>
+        <div style={{ textAlign: "center" }}>
+          <Button type="submit" style={btnStyle}>
+            Login
+          </Button>
+        </div>
       </Form>
+
+      <div style={{ textAlign: "center" }}>New to BlogChain?{" "}
+        <a href="/" style={{ textDecoration: "none" }}>
+          Sign Up now!
+        </a>
+      </div>
     </div>
   );
 };

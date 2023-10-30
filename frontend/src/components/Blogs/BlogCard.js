@@ -5,7 +5,7 @@ import formatDateAndTime from "../../utils/DateTimeUtils";
 import axios from "axios";
 import { useState } from "react";
 
-const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
+const BlogCard = ({ props, setMyBlogs, myBlogs, homepage }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [newTitle, setNewTitle] = useState();
   const [newTextBody, setNewTextBody] = useState();
@@ -34,14 +34,10 @@ const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
       });
   };
 
-  const h1Style = {
-   
-  }
-
   const handleDeleteBlog = (blogId) => {
     axios
       .delete(
-        `${process.env.REACT_APP_BACKEND_URL}/blog/deleteBlog/${blogId}`,
+        `${process.env.REACT_APP_BACKEND_URL}/blog/delete-blog/${blogId}`,
         {
           headers: {
             "X-Acciojob": token,
@@ -64,8 +60,18 @@ const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
       .catch((err) => alert(err));
   };
 
+  const cardStyle = {
+    width: "80%",
+    marginBottom: "10px",
+    margin: "auto",
+    padding: "15px",
+    backgroundColor: "#242422",
+    color: "white",
+    border: "1px solid grey",
+  };
+
   return (
-    <Card style={{ width: "100%", marginBottom: "20px" }}>
+    <Card style={cardStyle}>
       <Card.Body>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Card.Title>{props.title}</Card.Title>
@@ -75,22 +81,31 @@ const BlogCard = ({ props, setMyBlogs, myBlogs }) => {
         </div>
 
         <Card.Text>{props.textBody}</Card.Text>
-        <Button
-          variant="primary"
-          style={{ marginRight: "20px" }}
-          onClick={() => setIsEdit(!isEdit)}
-        >
-          Edit
-        </Button>
-        <Button variant="danger" onClick={() => handleDeleteBlog(props._id)}>
-          Delete
-        </Button>
+        {homepage ? (
+          <></>
+        ) : (
+          <>
+            <Button
+              variant="primary"
+              style={{ marginRight: "20px" }}
+              onClick={() => setIsEdit(!isEdit)}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="danger"
+              onClick={() => handleDeleteBlog(props._id)}
+            >
+              Delete
+            </Button>
+          </>
+        )}
 
         {/* edit blog */}
         {isEdit ? (
           <>
             <Form onSubmit={(e) => handleSubmit(e, props._id)}>
-              <h1 style={h1Style}>Edit Blog</h1>
+              <h2 style={{ margin: "40px 0 -40px 0", textAlign: "center" }}>Edit Blog</h2>
 
               {/* Blog title */}
               <Form.Group className="mb-3 mt-5" controlId="title">

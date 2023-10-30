@@ -16,11 +16,14 @@ function FollowerList() {
       })
       .then((res1) => {
         axios
-          .get(`${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`, {
-            headers: {
-              "X-Acciojob": token,
-            },
-          })
+          .get(
+            `${process.env.REACT_APP_BACKEND_URL}/follow/get-following-list`,
+            {
+              headers: {
+                "X-Acciojob": token,
+              },
+            }
+          )
           .then((res2) => {
             let followingMap = new Map();
 
@@ -65,16 +68,45 @@ function FollowerList() {
       });
   }, [token]);
 
+  const divStyle = {
+    padding: "30px",
+    width: "70%",
+    margin: "auto",
+  };
+
+  const h1Style = {
+    textAlign: "center",
+    margin: "10px auto 0px",
+    letterSpacing: "1.5px",
+  };
+
+  const h4Style = {
+    textAlign: "center",
+    margin: "20px auto 0px",
+    fontWeight: "400",
+    letterSpacing: "0.5px",
+    lineHeight: "40px",
+  };
+
   return (
-    <div>
+    <>
       <Header />
-      <h1 style={{ textAlign: "center", margin: "20px" }}>Follower</h1>
-      <div style={{ padding: "20px", display: "flex" }}>
-        {followerList?.map((user) => (
-          <UserCard props={user} />
-        ))}
+      <div style={divStyle}>
+        <h1 style={h1Style}>Followers</h1>
+        <hr style={{marginBottom: "30px"}} />
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+          {followerList && followerList.length ? (
+            followerList.map((user) => <UserCard props={user} />)
+          ) : (
+            <h5 style={h4Style}>
+              You have 0 followers
+              <br />
+              Stay active on BlogChain to gain followers!
+            </h5>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

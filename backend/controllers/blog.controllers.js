@@ -3,6 +3,7 @@ const Blog = require("../models/Blog");
 const { blogBelongsToUser } = require("../utils/blogBelongsToUser");
 const { getFollowingListFromDB } = require("../repositories/follow.repository");
 const { getFollowingBlogsFromDB } = require("../repositories/blog.repository");
+const { ERR, TRUE, FALSE } = require("../constants");
 
 // POST - create blog
 const createBlog = async (req, res) => {
@@ -75,7 +76,7 @@ const getUserBlogs = async (req, res) => {
 
 // DELETION - API to Delete a blog
 const deleteBlog = async (req, res) => {
-  const blogId = req.params.blogid;
+  const blogId = req.params.blogId;
   const userId = req.locals.userId;
   // check if the user whom the blog belongs to is trying to delete it
   const blogBelongsToUserStatus = await blogBelongsToUser(blogId, userId);

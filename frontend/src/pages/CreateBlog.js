@@ -4,6 +4,8 @@ import axios from "axios";
 import { useState } from "react";
 import Header from "../components/common/Header";
 
+import "./createBlog.css"
+
 const CreateBlog = () => {
   const [title, setTitle] = useState();
   const [textBody, setTextBody] = useState();
@@ -36,25 +38,26 @@ const CreateBlog = () => {
   };
 
   const h1Style = {
-    marginBottom: "40px",
     display: "flex",
     justifyContent: "center",
+    marginTop: "40px",
   };
 
   return (
     <>
       <Header />
-      <div style={{ padding: "5rem" }}>
+      <div style={{ width: "70%", margin: "auto" }}>
         <Form onSubmit={handleSubmit}>
           <h1 style={h1Style}>Create a Blog</h1>
-
+          <hr />
           {/* Blog title */}
-          <Form.Group className="mb-3" controlId="title">
+          <Form.Group className="mb-3 mt-5" controlId="title">
             <Form.Label>Title</Form.Label>
             <Form.Control
               type="text"
               placeholder="Enter Title"
               onChange={(e) => setTitle(e.target.value)}
+              className="input"
             />
           </Form.Group>
 
@@ -66,6 +69,7 @@ const CreateBlog = () => {
               rows={5}
               placeholder="Type your Blog here!"
               onChange={(e) => setTextBody(e.target.value)}
+              className="input"
             />
           </Form.Group>
 

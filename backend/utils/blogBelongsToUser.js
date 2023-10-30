@@ -2,6 +2,7 @@ const {TRUE, FALSE, ERR, NOT_EXIST} = require("../constants")
 const { getBlogDataFromDB } = require("../repositories/blog.repository");
 
 const blogBelongsToUser = async (blogId, userId) => {
+  console.log(`BlogId from utils function : ${blogId}`)
   const blogData = await getBlogDataFromDB(blogId);
 
   if (blogData.err) {
