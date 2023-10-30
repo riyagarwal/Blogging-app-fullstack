@@ -66,7 +66,7 @@ const Register = () => {
   return (
     <div style={mainDivStyle}>
       <Form onSubmit={handleSubmit}>
-        <h1 style={h1Style}>Register into Blog App</h1>
+        <h1 style={h1Style}>BlogChain Sign Up</h1>
 
         {/* Username */}
         <Form.Group className="mb-3" controlId="username">

@@ -62,7 +62,7 @@ const Login = () => {
   return (
     <div style={mainDivStyle}>
       <Form onSubmit={handleSubmit}>
-        <h1 style={h1Style}>Login to Blog App</h1>
+        <h1 style={h1Style}>Login to BlogChain</h1>
 
         {/* Login ID */}
         <Form.Group className="mb-3" controlId="loginId">
