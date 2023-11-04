@@ -19,7 +19,7 @@ const isAuth = (req, res, next) => {
 
   if (verifiedPayload) {
     req.locals = verifiedPayload;
-    console.log(req.locals);
+    // console.log(req.locals);
     next();
   } else {
     res.status(401).send({

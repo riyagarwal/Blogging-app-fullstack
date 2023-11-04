@@ -33,7 +33,7 @@ const CreateBlog = () => {
         }
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   };
 

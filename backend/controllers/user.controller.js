@@ -73,8 +73,10 @@ const registerUser = async (req, res) => {
 // LOGIN USER
 const loginUser = async (req, res) => {
   const { loginId, password } = req.body;
+  console.log(loginId.length, password.length)
+  console.log(loginId && (loginId.length === 0))
 
-  if ((loginId && loginId.length == 0) || (password && password.length == 0)) {
+  if ((loginId && (loginId.length == 0)) || (password && (password.length == 0))) {
     return res.status(400).send({
       status: 400,
       message: "Enter credentials to login!",

@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Login = () => {
-  const [loginId, setLoginId] = useState();
-  const [password, setPassword] = useState();
+  const [loginId, setLoginId] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -32,7 +32,7 @@ const Login = () => {
         }
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   };
 

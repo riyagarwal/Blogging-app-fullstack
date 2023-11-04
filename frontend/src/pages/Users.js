@@ -93,8 +93,8 @@ function Users() {
             justifyContent: "center",
           }}
         >
-          {users?.map((user) => (
-            <UserCard props={user} />
+          {users?.map((user, idx) => (
+            <UserCard key={idx} props={user} />
           ))}
         </div>
       </div>
