@@ -47,7 +47,7 @@ function Homepage() {
       <Header />
       <div style={divStyle}>
         <h1 style={h1Style}>Blogs For You</h1>
-        <hr style={{marginBottom: "30px"}}/>
+        <hr style={{ marginBottom: "30px" }} />
         {homeBlogs && homeBlogs.length > 0 ? (
           homeBlogs.map((blog) => <BlogCard props={blog} homepage={true} />)
         ) : (

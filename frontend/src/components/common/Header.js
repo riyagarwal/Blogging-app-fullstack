@@ -11,7 +11,7 @@ function Header() {
   const token = localStorage.getItem("token");
 
   return (
-    <Navbar expand="lg" className="bg-body-tertiary">
+    <Navbar expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="/home">BlogChain</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />

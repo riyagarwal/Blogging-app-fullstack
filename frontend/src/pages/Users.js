@@ -86,7 +86,13 @@ function Users() {
       <div style={divStyle}>
         <h1 style={h1Style}>Users</h1>
         <hr style={{ marginBottom: "30px" }} />
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           {users?.map((user) => (
             <UserCard props={user} />
           ))}

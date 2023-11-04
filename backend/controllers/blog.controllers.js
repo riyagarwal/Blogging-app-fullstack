@@ -54,12 +54,10 @@ const getUserBlogs = async (req, res) => {
 
   try {
     // PAGINATION
-    const myBlogsData = await Blog.find({ userId })
+    const myBlogsData = await Blog.find({ userId, isDeleted: false })
       .sort({ creationDateTime: -1 })
       .skip((page - 1) * LIMIT)
       .limit(LIMIT);
-
-    console.log(myBlogsData);
 
     res.status(200).send({
       status: 200,
@@ -93,7 +91,10 @@ const deleteBlog = async (req, res) => {
     });
   } else {
     try {
-      await Blog.findByIdAndDelete(blogId);
+      await Blog.findByIdAndUpdate(blogId, {
+        isDeleted: true,
+        deletionDateTime: Date.now(),
+      });
       res.status(200).send({
         status: 200,
         message: "Blog deleted successfully!",

@@ -8,8 +8,8 @@ require("dotenv").config();
 const db = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const blogRoutes = require("./routes/blogRoutes");
-const followRoutes = require("./routes/followRoutes")
-const {cleanUpBin} = require("./utils/cron")
+const followRoutes = require("./routes/followRoutes");
+const { cleanUpBin } = require("./utils/cron");
 
 const PORT = process.env.SERVER_PORT;
 
@@ -25,5 +25,5 @@ app.use("/follow", followRoutes);
 
 app.listen(8001, () => {
   console.log("Server is running at port", PORT);
-  cleanUpBin()
+  cleanUpBin();
 });

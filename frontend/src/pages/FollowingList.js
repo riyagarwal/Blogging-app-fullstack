@@ -59,8 +59,14 @@ function FollowingList() {
       <Header />
       <div style={divStyle}>
         <h1 style={h1Style}>Following</h1>
-        <hr style={{marginBottom: "30px"}} />
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        <hr style={{ marginBottom: "30px" }} />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           {followingList && followingList.length > 0 ? (
             followingList.map((user) => <UserCard props={user} />)
           ) : (

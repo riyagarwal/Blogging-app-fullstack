@@ -6,8 +6,6 @@ const getBlogDataFromDB = async (blogId) => {
     err: null,
   };
 
-  console.log(`BlogId: ${blogId}`)
-
   try {
     blogData.data = await Blog.findOne({ _id: blogId });
     return blogData;

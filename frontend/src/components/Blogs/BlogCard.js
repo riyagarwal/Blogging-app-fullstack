@@ -12,7 +12,7 @@ const BlogCard = ({ props, setMyBlogs, myBlogs, homepage }) => {
 
   const token = localStorage.getItem("token");
 
-  const handleSubmit = (e, blogId) => {
+  const handleEdit = (e, blogId) => {
     e.preventDefault();
     const newBlogObj = {
       blogId,
@@ -104,7 +104,7 @@ const BlogCard = ({ props, setMyBlogs, myBlogs, homepage }) => {
         {/* edit blog */}
         {isEdit ? (
           <>
-            <Form onSubmit={(e) => handleSubmit(e, props._id)}>
+            <Form onSubmit={(e) => handleEdit(e, props._id)}>
               <h2 style={{ margin: "40px 0 -40px 0", textAlign: "center" }}>Edit Blog</h2>
 
               {/* Blog title */}
