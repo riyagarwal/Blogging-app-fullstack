@@ -31,7 +31,7 @@ function FollowingList() {
         setFollowingList(followingListArr);
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   }, [token]);
 

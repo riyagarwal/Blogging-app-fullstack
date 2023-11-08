@@ -18,7 +18,7 @@ function Homepage() {
         setHomeBlogs(res.data.data);
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   }, [token]);
 

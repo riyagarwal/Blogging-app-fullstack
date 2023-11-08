@@ -59,12 +59,9 @@ function FollowerList() {
 
             setFollowerList(allUserDetails);
           })
-          .catch((err) => {
-            alert(err);
-          });
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   }, [token]);
 
@@ -93,8 +90,14 @@ function FollowerList() {
       <Header />
       <div style={divStyle}>
         <h1 style={h1Style}>Followers</h1>
-        <hr style={{marginBottom: "30px"}} />
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        <hr style={{ marginBottom: "30px" }} />
+        <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+          }}
+        >
           {followerList && followerList.length ? (
             followerList.map((user) => <UserCard props={user} />)
           ) : (

@@ -5,10 +5,12 @@ const { createBlog, getUserBlogs, deleteBlog, editBlog, getHomepageBlogs } = req
 
 const app = express(); //'router' is the same as 'app' in index.js just with a different name.
 
-app.post("/create-blog", isAuth, createBlog);
-app.get("/get-user-blogs", isAuth, getUserBlogs);
-app.delete("/delete-blog/:blogId", isAuth, deleteBlog);
-app.put("/edit-blog", isAuth, editBlog)
-app.get("/homepage-blogs", isAuth, getHomepageBlogs);
+app.use(isAuth)
+
+app.post("/create-blog", createBlog);
+app.get("/get-user-blogs", getUserBlogs);
+app.delete("/delete-blog/:blogId", deleteBlog);
+app.put("/edit-blog", editBlog)
+app.get("/homepage-blogs", getHomepageBlogs);
 
 module.exports = app;

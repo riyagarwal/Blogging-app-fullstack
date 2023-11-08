@@ -9,13 +9,15 @@ const isAuth = (req, res, next) => {
   } catch (err) {
     return res.status(400).send({
       status: 400,
-      message: "JWT not provided. Please login!",
+      message: "You are not logged in!",
     });
+
+
   }
 
   // verifiedPayload has the entire payload sent while generating the token.
 
-  console.log(verifiedPayload);
+  // console.log(verifiedPayload);
 
   if (verifiedPayload) {
     req.locals = verifiedPayload;
@@ -24,10 +26,9 @@ const isAuth = (req, res, next) => {
   } else {
     res.status(401).send({
       status: 401,
-      message: "User is unauthenticated. Please login",
+      message: "User is unauthorized. Please login",
     });
   }
-
 };
 
 module.exports = { isAuth };

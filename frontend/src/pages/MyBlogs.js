@@ -17,7 +17,7 @@ const MyBlogs = () => {
       .then((res) => {
         setMyBlogs(res.data.data);
       })
-      .catch((err) => alert(err));
+      .catch((err) => alert(err.response.data.message));
   }, [token]);
 
   const divStyle = {
@@ -45,7 +45,7 @@ const MyBlogs = () => {
       <Header />
       <div style={divStyle}>
         <h1 style={h1Style}>My Blogs</h1>
-        <hr style={{marginBottom: "30px"}} />
+        <hr style={{ marginBottom: "30px" }} />
         {myBlogs && myBlogs.length > 0 ? (
           myBlogs.map((blog, key) => (
             <BlogCard

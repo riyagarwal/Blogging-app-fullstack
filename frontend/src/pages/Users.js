@@ -59,12 +59,9 @@ function Users() {
 
             setUsers(allUserDetails);
           })
-          .catch((err) => {
-            alert(err);
-          });
       })
       .catch((err) => {
-        alert(err);
+        alert(err.response.data.message);
       });
   }, [token]);
 

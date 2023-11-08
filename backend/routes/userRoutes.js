@@ -5,15 +5,16 @@ const {
   getAllUsers,
 } = require("../controllers/user.controller");
 const { isAuth } = require("../middlewares/AuthMiddleware");
+const {logger} = require("../middlewares/logger")
 
-const app = express(); //'router' is the same as 'app' in index.js just with a different name.
+const app = express(); 
 
-// app.get("/gethome", (req, res) => {
-//   res.status(200).send("working");
-// });
+app.get("/", (req, res) => {
+  res.status(200).send("working");
+});
 
 app.post("/register", registerUser);
 app.post("/login", loginUser);
-app.get("/get-all-users", isAuth, getAllUsers);
+app.get("/get-all-users", isAuth, logger, getAllUsers);
 
 module.exports = app;
